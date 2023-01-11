@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://stag1129.github.io/note/</id>
+    <title>小🦌书屋</title>
+    <updated>2023-01-11T07:46:54.610Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://stag1129.github.io/note/"/>
+    <link rel="self" href="https://stag1129.github.io/note/atom.xml"/>
+    <logo>https://stag1129.github.io/note/images/avatar.png</logo>
+    <icon>https://stag1129.github.io/note/favicon.ico</icon>
+    <rights>All rights reserved 2023, 小🦌书屋</rights>
+    <entry>
+        <title type="html"><![CDATA[Java虚拟机与JVM高级特性]]></title>
+        <id>https://stag1129.github.io/note/Java虚拟机与Java高级特性/</id>
+        <link href="https://stag1129.github.io/note/Java虚拟机与Java高级特性/">
+        </link>
+        <updated>2023-01-08T04:18:11.000Z</updated>
+        <summary type="html"><![CDATA[<p>📖 学习书目: 深入理解Java虚拟机 JVM高级特性与最佳实践(第三版 2019出版)<br>
+🔖 适读人群: 1. Java技术体系中、高级开发人员; 2. 系统调优师; 3. 系统架构师;</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>📖 学习书目: 深入理解Java虚拟机 JVM高级特性与最佳实践(第三版 2019出版)<br>
+🔖 适读人群: 1. Java技术体系中、高级开发人员; 2. 系统调优师; 3. 系统架构师;</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Redis数据库]]></title>
+        <id>https://stag1129.github.io/note/Redis数据库/</id>
+        <link href="https://stag1129.github.io/note/Redis数据库/">
+        </link>
+        <updated>2022-12-28T10:54:16.000Z</updated>
+        <summary type="html"><![CDATA[<p>📖 内容介绍：Redis是一种NoSQL数据库<br>
+数百万开发人员用作数据库、缓存、流式处理引擎和消息代理的开源内存中数据存储</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>📖 内容介绍：Redis是一种NoSQL数据库<br>
+数百万开发人员用作数据库、缓存、流式处理引擎和消息代理的开源内存中数据存储</p>
+]]></content>
+    </entry>
+</feed>

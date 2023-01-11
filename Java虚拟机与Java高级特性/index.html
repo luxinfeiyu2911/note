@@ -1,0 +1,316 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java虚拟机与JVM高级特性 | 小🦌书屋</title>
+
+<link rel="shortcut icon" href="https://stag1129.github.io/note//favicon.ico?v=1673423068352">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stag1129.github.io/note//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg" style="padding-top: 10px !important; padding-bottom: 10px !important;">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            小🦌书屋
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                            <a href="/" class="menu gt-a-link">
+                                🏠首页
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/archives" class="menu gt-a-link">
+                                📚归档
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/tags" class="menu gt-a-link">
+                                🔖标签
+                            </a>
+                            
+                </div>
+                
+                <div class="nav-item">
+                    
+                            <a href="/about" class="menu gt-a-link">
+                                🪶关于
+                            </a>
+                            
+                </div>
+                
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1673423068352"
+                action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second" style="border-radius: 7px;">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java虚拟机与JVM高级特性
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2023-01-08 ·
+                    </time>
+                    
+                        <a href="https://stag1129.github.io/note/java/" class="post-tags">
+                            # JAVA
+                        </a>
+                    
+                        <a href="https://stag1129.github.io/note/java_vm/" class="post-tags">
+                            # JAVA VM
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>📖 学习书目: 深入理解Java虚拟机 JVM高级特性与最佳实践(第三版 2019出版)<br>
+🔖 适读人群: 1. Java技术体系中、高级开发人员; 2. 系统调优师; 3. 系统架构师;</p>
+<!-- more -->
+<h2 id="前言-介绍书目">前言-介绍书目</h2>
+<ul>
+<li>本书共五部分: 走进Java、自动内存管理、虚拟机执行子系统、程序编译与代码优化、高效并发; 各部分之间互相独立,前后没有依赖</li>
+<li>部分内的章节存在先后顺序</li>
+</ul>
+<p>📜 部分一: 走进Java(第1章)</p>
+<blockquote>
+<p>第1章: 介绍Java技术体系的相关情况,使用的JDK版本为: OpenJDK 12</p>
+</blockquote>
+<p>📜 部分二: 自动内存管理(第2~5章)</p>
+<blockquote>
+<p>第2章: 虚拟机内存划分,哪部分导致内存溢出异常的方式和出现原因<br>
+第3章: 垃圾收集算法和HotSpot虚拟机中提供的几款垃圾收集器的特点及运作原理<br>
+第4章: 随JDK发布的基础命令行工具与可视化的故障处理工具的使用方法<br>
+第5章: 通过实际案例来讲解故障处理和调优</p>
+</blockquote>
+<p>📜 部分三: 虚拟机执行子系统(第6~9章)</p>
+<blockquote>
+<p>第6章: 讲解Class文件结构的各部分组成,每部分的定义、数据结构和使用方法,演示Class的数据如何存储和访问<br>
+第7章: 类的加载过程: “加载”,“验证”,“准备”,“解析”和“初始化”,五个阶段中虚拟机分别进行哪些操作,类加载器的工作原理及对虚拟机的意义高效并发<br>
+第8章: 虚拟机执行代码时,分析并找到正确的方法和执行方法内的字节码,以及内存结构<br>
+第9章: 通过执行子系统的案例,了解使用类加载器和处理字节码的一些思路</p>
+</blockquote>
+<p>📜 部分四: 程序编译与代码优化(第10~11章)</p>
+<blockquote>
+<p>第10章: 分析Java语言中的泛型、主动装箱拆箱、条件编译等多种语法糖,实战如何使用插入式注解处理器来检查程序命名规范的编译器插件<br>
+第11章: 虚拟机的热点探测方法、HotSpot的即时编译器、编译触发条件,从虚拟机外部观察和分析即时编译的数据和结果,以及几种常见的编译期优化技术</p>
+</blockquote>
+<p>📜 部分五: 高效并发(第12~13章)</p>
+<blockquote>
+<p>第12章: 虚拟机Java内存模型的结构及操作,以及原子性、可见性和有序性,先行发生原则的规则及使用,以及线程在Java语言中的实现,以及Java中的协程的相关内容<br>
+第13章: 线程安全涉及的概念和分类、同步实现的方式及虚拟机的底层运作原理,虚拟机实现高效并发所做的一系列锁优化措施</p>
+</blockquote>
+<h2 id="第1章-走进java">第1章: 走进Java</h2>
+<h3 id="11-java简介">1.1 Java简介</h3>
+<p>Java 存在的优点:</p>
+<ul>
+<li>结构严谨、面向对象的编程语言</li>
+<li>摆脱了硬件平台的束缚</li>
+<li>提供了相对安全的内存管理和访问机制,避免了绝大部分内存泄漏和指针越界问题</li>
+<li>热点代码检测和运行时编译及优化</li>
+<li>完善的应用程序接口,极大的提升了软件的开发效率</li>
+</ul>
+<h3 id="12-java技术体系">1.2 Java技术体系</h3>
+<p>JCP官方(Java Community Process,Java社区)定义的Java技术体系包括:</p>
+<ul>
+<li>Java程序涉及语言</li>
+<li>各种硬件平台上的Java虚拟机实现</li>
+<li>Class文件格式</li>
+<li>Java类库API</li>
+<li>来自商业机构和开源社区的第三方Java类库</li>
+</ul>
+<p>根据Java各个组成部分的功能来进行划分:</p>
+<ol>
+<li>JDK(Java Development Kit): Java虚拟机、Java类库、Java程序设计语言; 支持Java程序开发的最小环境</li>
+<li>JRE(Java Runtime Environment): Java类库API中的Java SE API子集、Java虚拟机; 支持Java程序运行的标准环境</li>
+</ol>
+<p>JDK和JRE范围图示:<br>
+<img src="https://stag1129.github.io/note//post-images/1673361417603.png" alt="JDK和JRE范围图示" loading="lazy"></p>
+<p>根据技术关注的重点业务来划分:</p>
+<ol>
+<li>Java Card: 支持Java小程序(Applets)运行在小内存设备上的平台</li>
+<li>Java ME(Micro Edition): 支持Java程序运行在移动终端(手机、PDA)上的平台,对Java API有所精简,并加入了移动端的针对性支持. 智能手机中主要使用Java语言开发程序的Android并不属于Java ME</li>
+<li>Java SE(Standard Edition): 支持面向桌面级应用(如Windows下的应用程序)的Java平台,提供了完整的Java核心API</li>
+<li>Java EE(Enterprise Edition): 支持使用多层架构的企业应用(如ERP、MIS、CRM应用)的Java平台,除了提供Java SE API外,还对其做了大量有针对性的扩充,提供相关部署支持</li>
+</ol>
+<h3 id="13-java发展历程">1.3 Java发展历程</h3>
+<p><strong>略</strong></p>
+<h3 id="14-java虚拟机家族">1.4 Java虚拟机家族</h3>
+<h4 id="141-sun-classicexact-vm">1.4.1 Sun Classic/Exact VM</h4>
+<blockquote>
+<p>🔖 Sun Classic: 世界上第一款商用Java虚拟机<br>
+Classic VM只能使用纯解释器方式来执行Java代码，要想使用即时编译器就需要外挂；但如果外挂了即时编译器，那么它就会接管虚拟机的执行系统，使得解释器无法工作</p>
+</blockquote>
+<ul>
+<li>JDK1.2之前，Sun提供的外挂编译器为sunwjit（Sun Workshop JIT），除此之外，类似的外挂编辑器还有Symantec JIT和shuJIT等</li>
+<li>JDK1.2时，曾在Solaris平台上发布过一款名为Exact VM的虚拟机，它的编译执行系统已经具备现代高性能虚拟机雏形，如热点探测、两级即时编译器、编译器与解释器混合工作模式等</li>
+</ul>
+<p>Exact VM使用准确式内存管理（Exact Memory Management，也称为Non-Con-Servative/Accurate Memory Management），准确式内存管理是指虚拟机可以知道内存中某个位置的数据具体是什么类型</p>
+<ul>
+<li>JDK1.3时，HotSpot VM成为默认虚拟机，Classic VM成为备用选择</li>
+<li>JDK1.4时，Classic VM才完全退出商用虚拟机的历史舞台，与Exact VM一起进入了 Sun Labs Research VM之中</li>
+</ul>
+<h4 id="142-hotspot-vm">1.4.2 HotSpot VM</h4>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://stag1129.github.io/note/Redis数据库/" class="post-title gt-a-link">
+                    Redis数据库
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first"></div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        <div>
+        <span>欢迎来到🦌的小书屋</span>&nbsp;&nbsp;
+    </div>
+    <div>
+        搭建距今:&nbsp;&nbsp;<span id="time" style="background-image: linear-gradient(to right, #1D976C, #93F9B9); -webkit-background-clip: text; color:
+        transparent;"></span>
+    </div>
+    <div>
+        一个<span
+            style="background-image: linear-gradient(to right, #6DD5FA, #2980B9); -webkit-background-clip: text; color: transparent;">正在奋斗</span>、<span
+            style="background-image: linear-gradient(to right,  #009FFF, #ec2F4B); -webkit-background-clip: text; color: transparent;">不断求学</span>、<span
+            style="background-image: linear-gradient(to right, #f12711, #f5af19); -webkit-background-clip: text; color: transparent;">追求新知</span>、<span
+            style="background-image: linear-gradient(to right, #FDC830, #F37335); -webkit-background-clip: text; color: transparent;">努力创新</span>的有志青年
+    </div>
+
+    <script>
+        Date.prototype.format = function (format) {
+            var o = {
+                "M+": this.getMonth() + 1, //month
+                "d+": this.getDate(), //day
+                "h+": this.getHours(), //hour
+                "m+": this.getMinutes(), //minute
+                "s+": this.getSeconds(), //second
+                "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
+                "S": this.getMilliseconds() //millisecond
+            }
+            if (/(y+)/.test(format)) format = format.replace(RegExp.$1,
+                (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o) if (new RegExp("(" + k + ")").test(format))
+                format = format.replace(RegExp.$1,
+                    RegExp.$1.length == 1 ? o[k] :
+                        ("00" + o[k]).substr(("" + o[k]).length));
+            return format;
+        }
+        //其中starttime格式为20180101010101
+        function getDiffTwoTime(startTime, endTime) {
+            if (startTime.length < 14 || endTime.length < 14) {
+                alert('时间格式不正确');
+            }
+            var startArr = [startTime.substring(0, 4), startTime.substring(4, 6), startTime.substring(6, 8), startTime.substring(8, 10), startTime.substring(10, 12), startTime.substring(12, 14)];//切分开始时间为数组
+            var endArr = [endTime.substring(0, 4), endTime.substring(4, 6), endTime.substring(6, 8), endTime.substring(8, 10), endTime.substring(10, 12), endTime.substring(12, 14)];//切分结束时间为数组
+            var dateStart = new Date(startArr[0], startArr[1], startArr[2], startArr[3], startArr[4], startArr[5]);//采用new Date(yyyy,mth,dd,hh,mm,ss);创建方式分别传入年月日时分秒
+            var dateEnd = new Date(endArr[0], endArr[1], endArr[2], endArr[3], endArr[4], endArr[5]);
+            var dateInterval = dateEnd.getTime() - dateStart.getTime() //获取时间差毫秒
+            //计算出相差天数
+            var days = Math.floor(dateInterval / (24 * 60 * 60 * 1000));
+            //计算小时数
+            var hourLevel = dateInterval % (24 * 60 * 60 * 1000);
+            var hours = Math.floor(hourLevel / (60 * 60 * 1000))
+            //计算分钟数
+            var minutesLevel = hourLevel % (60 * 60 * 1000);
+            var minutes = Math.floor(minutesLevel / (60 * 1000));
+            //计算秒数
+            var seconds = Math.round((minutesLevel % (60 * 1000)) / 1000);
+            return days + ' 天 ' + hours + ' 时 ' + minutes + ' 分 ' + seconds + ' 秒 '
+        }
+        //填充时间
+        function fillintime() {
+            let startTime = new Date("2023-01-07 22:30:00").format('yyyyMMddhhmmss');
+            let currentTime = new Date().format('yyyyMMddhhmmss');
+            document.getElementById('time').innerHTML = getDiffTwoTime(startTime, currentTime)
+        }
+        //定期执行
+        let ref = setInterval(function () {
+            fillintime();
+            // clearInterval(ref); //取消执行
+        }, 1000);
+    </script>
+    </div>
+    <div style="display: none;">
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://stag1129.github.io/note//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
